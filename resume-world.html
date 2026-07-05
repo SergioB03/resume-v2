@@ -154,6 +154,12 @@
   html.day .cloud { filter: brightness(2.4) saturate(.45); }
   .cloud { transition: filter 4s ease; }
 
+  /* dimensional emboss for UI icons everywhere (the penguin keeps its flat indie look) */
+  .tbtn svg, #popit-btn svg, #btn-sound svg, .lv-nav svg, .lv-close svg,
+  .contact-list svg, .big-contacts svg, .medal .orb svg, .paw svg {
+    filter: drop-shadow(0 -1px 0 rgba(255,255,255,.28)) drop-shadow(0 1.5px 0 rgba(0,0,0,.35));
+  }
+
   .cloud {
     position: fixed; width: 190px; height: 58px; border-radius: 40px;
     background: linear-gradient(180deg, #223049 0%, #182338 100%);
@@ -255,7 +261,10 @@
     pointer-events: none; will-change: transform, opacity;
     z-index: 4;
   }
-  .prop svg { position: absolute; overflow: visible; }
+  .prop svg { position: absolute; overflow: visible;
+    /* stacked-paper 3D lift off the felt surface */
+    filter: drop-shadow(0 3px 0 rgba(3,9,6,.4)) drop-shadow(0 7px 7px rgba(0,0,0,.28));
+  }
   .prop svg .ln { stroke: #2a2118; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
   .prop .prop-tag {
     position: absolute; left: 50%; transform: translateX(-50%);
@@ -284,7 +293,8 @@
       radial-gradient(circle at 32% 26%, rgba(255,255,255,.4), transparent 46%),
       radial-gradient(circle at 50% 55%, var(--lv-hi) 0%, var(--lv) 55%, var(--lv-deep) 130%);
     border: 4px solid var(--paper);
-    box-shadow: 0 3px 0 rgba(0,0,0,.28), 0 10px 18px rgba(0,0,0,.45), inset 0 -5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 3px 0 rgba(0,0,0,.28), 0 10px 18px rgba(0,0,0,.45),
+                inset 0 4px 7px rgba(255,255,255,.35), inset 0 -5px 10px rgba(0,0,0,.28);
     /* scale via the independent `scale` property so the JS depth transform
        on the parent never re-triggers a transition */
     transition: scale .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
@@ -300,8 +310,13 @@
                 inset 0 -.6vmin 1.2vmin rgba(0,0,0,.2),
                 0 0 3vmin var(--lv), 0 0 7vmin rgba(0,180,216,.35);
   }
-  .sticker svg { width: 55%; height: 55%; }
-  .sticker svg * { stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+  .sticker svg { width: 55%; height: 55%;
+    /* embossed 3D: top highlight + hard extrusion + soft depth (penguin stays flat) */
+    filter: drop-shadow(0 -1px 0 rgba(255,255,255,.5))
+            drop-shadow(0 2px 0 rgba(0,0,0,.38))
+            drop-shadow(0 4px 3px rgba(0,0,0,.22));
+  }
+  .sticker svg * { stroke: var(--ink); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; fill: none; }
 
   /* per-level accent trios */
   .marker[data-level="start"]    { --lv-hi:#90e0ef; --lv:#00b4d8; --lv-deep:#036e86; }
