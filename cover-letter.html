@@ -15,18 +15,24 @@
   <header>
     <h5>Portfolio</h5>
     <h1 class="hero-name">Sergio Banuelos</h1>
-    <p class="hero-subtitle">Software Engineer</p>
+    <p class="hero-subtitle">Aspiring Software Engineer</p>
 
     <div class="contact-bar">
-      <span>📧 <a href="mailto:sergiobanuelos03@gmail.com">sergiobanuelos03@gmail.com</a></span>
-      <span>📞 <a href="tel:6785550147">(678) 555-0147</a></span>
-      <span>📍 Atlanta, GA</span>
+      <span><a href="mailto:sergiobanuelos03@gmail.com">sergiobanuelos03@gmail.com</a></span>
+      <span>Greater Atlanta, GA</span>
     </div>
+
+    <p class="identity-flair">
+      <span class="flair-chip">Coding enthusiast</span>
+      <span class="flair-chip">Dog-hiker</span>
+      <span class="flair-chip">Ranked grinder</span>
+    </p>
 
     <nav aria-label="Portfolio navigation">
       <a href="resume.html">Résumé</a>
       <a href="cover-letter.html" class="active">Cover Letter</a>
       <a href="career-goals.html">Career Goals</a>
+      <a href="resume-world.html">Sergio's World</a>
     </nav>
   </header>
 
@@ -37,7 +43,7 @@
       <span class="section-label">Letter of Interest</span>
       <h2>Cover Letter</h2>
       <p class="page-intro">
-        Addressed to the Software Engineering hiring team at <strong>Google LLC</strong>.
+        A general letter of interest for <strong>software engineering</strong> roles.
       </p>
     </section>
 
@@ -49,17 +55,15 @@
 
         <p>
           <span class="mono-text">Sergio Banuelos</span><br />
-          Atlanta, GA<br />
-          <a href="mailto:sergiobanuelos03@gmail.com">sergiobanuelos03@gmail.com</a> &nbsp;|&nbsp; (678) 555-0147
+          Greater Atlanta, GA<br />
+          <a href="mailto:sergiobanuelos03@gmail.com">sergiobanuelos03@gmail.com</a>
         </p>
 
         <hr />
 
         <p>
           <strong>Hiring Manager</strong><br />
-          Google LLC<br />
-          1600 Amphitheatre Parkway<br />
-          Mountain View, CA 94043
+          Atlanta, GA
         </p>
 
         <hr />
@@ -67,23 +71,24 @@
         <p>Dear Hiring Manager,</p>
 
         <p>
-          I am writing to express my sincere interest in a <mark>Software Engineer</mark> position at Google. 
-          As a Computer Science student at Western Governors University with a growing portfolio of technical projects 
-          and a background that has consistently demanded leadership, adaptability, and a commitment to doing right by 
-          the people around me, I believe I bring both the skills and the character that Google looks for in its engineers.
+          I am writing to express my sincere interest in a <mark>Software Engineer</mark> position with your organization.
+          As a Computer Science student at Western Governors University with a growing portfolio of technical projects
+          and a background that has consistently demanded leadership, adaptability, and a commitment to doing right by
+          the people around me, I believe I bring both the skills and the character that strong engineering teams look for.
         </p>
 
         <p>
-          What draws me to Google is not just the scale of the problems your teams solve — it is the <em>culture of intellectual 
-          curiosity and collaborative problem-solving</em> that permeates everything the company does. I am the kind of person 
-          who cannot walk past an unanswered question. Whether I am studying database normalization at midnight or designing 
-          an AI-powered match performance tool using the Claude API and the Riot Games API, I am always pushing to understand 
-          systems more deeply and build things that actually matter to real people.
+          What draws me to software engineering is not just the scale of the problems great teams solve — it is the <em>culture of intellectual
+          curiosity and collaborative problem-solving</em> that the best engineering organizations are built on. I am the kind of person
+          who cannot walk past an unanswered question. Whether I am studying database normalization at midnight or architecting a
+          multi-agent enterprise AI platform — <strong>CeREbrus</strong>, which I built solo and deployed live during a hackathon using
+          Google's Agent Development Kit and Gemini — I am always pushing to understand systems more deeply and build things that
+          actually matter to real people.
         </p>
 
         <p>
           My path to software engineering is not traditional, and I believe that is an asset. I spent several years as a 
-          <strong>Construction Foreman</strong> at Summit Commercial Coatings, where I managed crews of up to eight people across 
+          <strong>Construction Foreman</strong> at KS Pro Painters LLC, where I managed crews of up to eight people across
           high-stakes commercial projects. That experience taught me how to <em>communicate clearly under pressure</em>, 
           make fast decisions with incomplete information, and earn the trust of a team — skills that are just as valuable in 
           a daily standup as they are on a job site. More recently, as a trail guide at Chattahoochee Dog Hikes, I have continued 
@@ -99,14 +104,14 @@
         </p>
 
         <p>
-          I am not simply looking for a job at Google. I am looking to contribute to a team of people who care deeply about 
+          I am not simply looking for a job. I am looking to contribute to a team of people who care deeply about
           what they build, learn from each other every day, and hold themselves to a standard that makes the work worthwhile. 
           I am confident that I will bring that same energy and commitment from day one.
         </p>
 
         <p>
           Thank you for your time and consideration. I would welcome the opportunity to speak further about how my background, 
-          work ethic, and growing technical skills could contribute to Google's mission. I look forward to connecting.
+          work ethic, and growing technical skills could contribute to your team's mission. I look forward to connecting.
         </p>
 
         <p>
@@ -128,10 +133,35 @@
   <!-- FOOTER -->
   <footer>
     <p id="site-footer-text">
-      &copy; 2025 Sergio Banuelos · Built with HTML, CSS &amp; JavaScript · Western Governors University Portfolio
+      &copy; 2026 Sergio Banuelos · Built with HTML, CSS &amp; JavaScript · Western Governors University Portfolio
     </p>
     <p><a href="resume.html">Résumé</a> &nbsp;|&nbsp; <a href="cover-letter.html">Cover Letter</a> &nbsp;|&nbsp; <a href="career-goals.html">Career Goals</a></p>
   </footer>
+
+  <!-- Scroll-reveal (progressive enhancement; no frameworks) -->
+  <script>
+    document.documentElement.classList.add('js');
+    document.addEventListener('DOMContentLoaded', function () {
+      var targets = document.querySelectorAll('main section, article');
+      targets.forEach(function (el) { el.classList.add('reveal'); });
+
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      targets.forEach(function (el) { observer.observe(el); });
+    });
+  </script>
 
 </body>
 </html>

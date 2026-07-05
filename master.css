@@ -516,7 +516,7 @@ ul.skills-list {
 }
 
 ul.skills-list li::before {
-  content: "▸ ";
+  content: "– ";
   color: var(--accent-cyan);
   font-size: 0.9rem;
 }
@@ -572,10 +572,273 @@ ul.nav-list {
    Responsive
    ============================================= */
 
+/* =============================================
+   Page Transitions (View Transitions API — MPA)
+   Vanilla CSS; gracefully ignored where unsupported
+   ============================================= */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: vt-fade-out 0.28s ease both;
+}
+
+::view-transition-new(root) {
+  animation: vt-fade-in 0.34s ease both;
+}
+
+@keyframes vt-fade-out {
+  to { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* =============================================
+   On-load + Scroll Reveal (progressive enhancement)
+   Hidden states ONLY apply when JS is present (.js)
+   ============================================= */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered reveal for collage tiles */
+.js .collage .reveal:nth-child(2) { transition-delay: 0.06s; }
+.js .collage .reveal:nth-child(3) { transition-delay: 0.12s; }
+.js .collage .reveal:nth-child(4) { transition-delay: 0.18s; }
+.js .collage .reveal:nth-child(5) { transition-delay: 0.24s; }
+.js .collage .reveal:nth-child(6) { transition-delay: 0.30s; }
+.js .collage .reveal:nth-child(7) { transition-delay: 0.36s; }
+.js .collage .reveal:nth-child(8) { transition-delay: 0.42s; }
+
+/* =============================================
+   Identity Flair — coder / dog-hiker / gamer
+   (uses the CSS `font` shorthand property)
+   ============================================= */
+
+.identity-flair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.1rem;
+}
+
+.flair-chip {
+  font: 600 0.82rem/1 var(--font-mono);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--accent-cyan);
+  background-color: rgba(0, 180, 216, 0.1);
+  border: 1px solid rgba(0, 180, 216, 0.35);
+  border-radius: 20px;
+  padding: 0.4rem 0.85rem;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.flair-chip:hover {
+  transform: translateY(-2px);
+  background-color: rgba(0, 180, 216, 0.2);
+  box-shadow: 0 4px 14px rgba(0, 180, 216, 0.18);
+}
+
+/* =============================================
+   Collage — themed stock imagery
+   ============================================= */
+
+.collage {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 130px;
+  grid-auto-flow: dense;
+  gap: 0.75rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.collage figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.collage figure:nth-child(1) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.collage figure:nth-child(6) {
+  grid-column: span 2;
+}
+
+.collage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: none;
+  border-radius: 0;
+  filter: saturate(0.85) brightness(0.82);
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.collage figure:hover img {
+  transform: scale(1.08);
+  filter: saturate(1.1) brightness(1);
+}
+
+.collage figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: linear-gradient(transparent, rgba(13, 17, 23, 0.9));
+  padding: 1.4rem 0.7rem 0.55rem;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.collage figure:hover figcaption {
+  opacity: 1;
+}
+
+/* =============================================
+   Interview-style Q&A
+   (uses the CSS `font` shorthand property)
+   ============================================= */
+
+.interview {
+  display: grid;
+  gap: 1rem;
+}
+
+.interview-item {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--accent-cyan);
+  border-radius: 0 8px 8px 0;
+  padding: 1.1rem 1.3rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.interview-item:hover {
+  border-color: var(--accent-cyan);
+  transform: translateX(3px);
+}
+
+.interview-q {
+  font: italic 700 1.05rem/1.4 var(--font-heading);
+  color: var(--accent-light);
+  margin-bottom: 0.4rem;
+}
+
+.interview-a {
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+/* =============================================
+   Sources & Credits
+   ============================================= */
+
+.credits-list {
+  list-style: square;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.credits-list li {
+  color: var(--text-muted);
+}
+
+/* =============================================
+   Project Screenshots
+   ============================================= */
+
+.project-shots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 1.1rem 0 0.4rem;
+}
+
+.project-shots figure {
+  margin: 0;
+}
+
+.project-shots img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.project-shots img:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-cyan);
+}
+
+.project-shots figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .project-shots { grid-template-columns: 1fr; }
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+
 @media (max-width: 640px) {
   h1 { font-size: 2rem; }
   .hero-name { font-size: 2.2rem; }
   .two-col { grid-template-columns: 1fr; }
   #profile-photo { float: none; margin: 0 0 1rem 0; }
   nav { gap: 0.4rem; }
+
+  .collage {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 110px;
+  }
+  .collage figure:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+  .collage figure:nth-child(6) { grid-column: span 2; }
+  .collage figcaption { opacity: 1; }
+}
+
+/* =============================================
+   Reduced-motion accessibility
+   ============================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+  .collage img,
+  .collage figure:hover img { transition: none; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
 }

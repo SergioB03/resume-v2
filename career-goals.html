@@ -15,13 +15,20 @@
   <header>
     <h5>Portfolio</h5>
     <h1 class="hero-name">Sergio Banuelos</h1>
-    <p class="hero-subtitle">Software Engineer</p>
+    <p class="hero-subtitle">Aspiring Software Engineer</p>
     <p id="page-tagline">Vision, Growth &amp; the Road Ahead</p>
+
+    <p class="identity-flair">
+      <span class="flair-chip">Coding enthusiast</span>
+      <span class="flair-chip">Dog-hiker</span>
+      <span class="flair-chip">Ranked grinder</span>
+    </p>
 
     <nav aria-label="Portfolio navigation">
       <a href="resume.html">Résumé</a>
       <a href="cover-letter.html">Cover Letter</a>
       <a href="career-goals.html" class="active">Career Goals</a>
+      <a href="resume-world.html">Sergio's World</a>
     </nav>
   </header>
 
@@ -37,7 +44,7 @@
         Here is where I am headed — and why.
       </p>
 
-      <img src="media/profile.png" alt="Sergio Banuelos — Software Engineer" style="width:200px; margin-bottom:1.5rem;" />
+      <img src="media/profile.jpg" alt="Sergio Banuelos — Aspiring Software Engineer" style="width:200px; margin-bottom:1.5rem;" />
     </section>
 
     <!-- GOALS -->
@@ -57,7 +64,7 @@
       <div class="goal-card">
         <h3>Ship Real Projects for My Portfolio</h3>
         <p>
-          I am currently developing a full-stack Valorant performance analyzer powered by the Claude API and Riot Games API.
+          I am currently developing a full-stack Valorant Performance Analyzer powered by the Claude API and Riot Games API.
           My goal is to deploy a polished, production-ready application that demonstrates end-to-end engineering capability — 
           from UI design in React to Python backends, cloud deployment on AWS, and AI integration via Retrieval-Augmented Generation (RAG).
           This project is my calling card.
@@ -112,6 +119,52 @@
 
     <hr />
 
+    <!-- FEATURED BUILD -->
+    <section id="featured-build">
+      <span class="section-label">Featured Build</span>
+      <h2>CeREbrus — Enterprise AI, Built Solo</h2>
+      <p class="page-intro">
+        Proof I can take an ambitious idea all the way to a live deployment on my own.
+      </p>
+
+      <div class="goal-card">
+        <h3>CeREbrus — Retail Intelligence Platform</h3>
+        <p class="job-meta">
+          <span class="date-badge">lablab.ai Hackathon · Solo Builder</span>&nbsp;&nbsp;
+          <strong>Transforming Enterprise Through AI</strong>
+        </p>
+        <p>
+          A retail intelligence platform powered by <strong>Google's Agent Development Kit (ADK)</strong> and
+          <strong>Gemini</strong>. Three specialized agents — <em>Knowledge Guardian</em>, <em>Customer Intel</em>,
+          and <em>Synthesis</em> — work together under a dedicated <strong>Governance</strong> agent that keeps
+          every decision compliant and accountable.
+        </p>
+        <p>
+          I built the whole thing solo: the multi-agent architecture, the <strong>Python</strong> backend, and a
+          live <strong>Cloudflare Tunnel</strong> deployment that made it publicly reachable during the competition.
+        </p>
+
+        <div class="project-shots">
+          <figure>
+            <img src="media/cerebrus-dashboard.png" alt="CeREbrus dashboard hero view" />
+            <figcaption>Intelligence dashboard</figcaption>
+          </figure>
+          <figure>
+            <img src="media/cerebrus-query.png" alt="CeREbrus cross-domain query interface" />
+            <figcaption>Cross-domain agent query</figcaption>
+          </figure>
+        </div>
+
+        <ul>
+          <li><em>Stack:</em> Google Agent Development Kit (ADK), Gemini, Python, Cloudflare Tunnel</li>
+          <li>Four-agent design: three specialists plus a Governance agent for compliance oversight</li>
+          <li>Repository: <a href="https://github.com/SergioB03/CeRebrus" target="_blank">github.com/SergioB03/CeRebrus</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <hr />
+
     <!-- BEYOND THE CODE -->
     <section id="beyond-code">
       <span class="section-label">Off the Clock</span>
@@ -120,7 +173,7 @@
       <div class="goal-card">
         <p>
           Home is <strong>McDonough, Georgia</strong>, where my wife and I share a house with
-          <em>four dogs and four cats</em> — two of the cats rescues we couldn't turn away.
+          <em>four dogs and four cats</em> — two of the cats are rescues we couldn't turn away.
           Weekends usually start early on a Chattahoochee trail with the pack, and most weekday
           mornings I make the commute into Atlanta <em>on purpose</em>. There's a kind of focus
           that only happens when I'm surrounded by other people who are hard at work — the city
@@ -134,6 +187,102 @@
           honestly, it's why the <em>Valorant Performance Analyzer</em> exists in the first place.
         </p>
       </div>
+
+      <div class="collage" role="group" aria-label="A visual snapshot of my life beyond the keyboard">
+        <figure>
+          <img src="media/collage-atlanta.jpg" alt="Atlanta city skyline" />
+          <figcaption>Atlanta · my headspace</figcaption>
+        </figure>
+        <figure>
+          <img src="media/collage-trail.jpg" alt="A wooded forest trail" />
+          <figcaption>Chattahoochee trails</figcaption>
+        </figure>
+        <figure>
+          <img src="media/collage-dog.jpg" alt="A dog out on a hike" />
+          <figcaption>The pack</figcaption>
+        </figure>
+        <figure>
+          <img src="media/collage-gaming.jpg" alt="Competitive gaming setup" />
+          <figcaption>Ranked queue</figcaption>
+        </figure>
+        <figure>
+          <img src="media/collage-setup.jpg" alt="A gaming battlestation" />
+          <figcaption>Battlestation</figcaption>
+        </figure>
+        <figure>
+          <img src="media/collage-code.jpg" alt="Source code on a screen" />
+          <figcaption>Building things</figcaption>
+        </figure>
+        <figure>
+          <img src="media/collage-city.jpg" alt="Downtown city street energy" />
+          <figcaption>City hustle</figcaption>
+        </figure>
+        <figure>
+          <img src="media/collage-dev.jpg" alt="A developer working on a laptop" />
+          <figcaption>Shipping code</figcaption>
+        </figure>
+      </div>
+
+      <p class="job-meta">Image credit: stock photography via LoremFlickr (Creative Commons); full references in <a href="#credits">Sources &amp; Credits</a> below.</p>
+    </section>
+
+    <hr />
+
+    <!-- INTERVIEW -->
+    <section id="interview">
+      <span class="section-label">Rapid Fire</span>
+      <h2>A Few Quick Questions</h2>
+      <p class="page-intro">The short version of who I am — straight answers, no fluff.</p>
+
+      <div class="interview">
+        <div class="interview-item">
+          <p class="interview-q">Where's home base?</p>
+          <p class="interview-a">
+            McDonough, Georgia — a full house I share with my wife, four dogs, and four cats
+            (two of the cats are rescues we couldn't say no to).
+          </p>
+        </div>
+
+        <div class="interview-item">
+          <p class="interview-q">Why computer science?</p>
+          <p class="interview-a">
+            I can't walk past an unanswered question. WGU is giving me the fundamentals;
+            my projects are where I prove I can actually build.
+          </p>
+        </div>
+
+        <div class="interview-item">
+          <p class="interview-q">What are you building right now?</p>
+          <p class="interview-a">
+            A Valorant Performance Analyzer that coaches the <em>mental</em> game — match telemetry
+            plus the Claude API and Riot Games API, grounded with Retrieval-Augmented Generation.
+          </p>
+        </div>
+
+        <div class="interview-item">
+          <p class="interview-q">Proudest project so far?</p>
+          <p class="interview-a">
+            DineroClaro — a bilingual financial-literacy app I built at the VibraATL hackathon at
+            Georgia State University to help Atlanta's underserved Hispanic community.
+          </p>
+        </div>
+
+        <div class="interview-item">
+          <p class="interview-q">How do you recharge?</p>
+          <p class="interview-a">
+            Early miles on a Chattahoochee trail with the pack, or a ranked Valorant / Overwatch queue.
+            Both reset my focus.
+          </p>
+        </div>
+
+        <div class="interview-item">
+          <p class="interview-q">Dream seat?</p>
+          <p class="interview-a">
+            A software engineering team at <strong>Google</strong> — global-scale problems and people
+            who push each other to be sharper.
+          </p>
+        </div>
+      </div>
     </section>
 
     <hr />
@@ -144,21 +293,21 @@
       <p class="page-intro">A brief multimedia introduction to my work and goals.</p>
 
       <div class="media-section">
-        <p class="media-label">🎵 Audio Introduction</p>
+        <p class="media-label">Audio Introduction</p>
         <audio controls>
           <source src="media/intro.wav" type="audio/wav" />
           Your browser does not support the audio element.
         </audio>
-        <p><em>Note: Replace this placeholder with a personal audio introduction recording.</em></p>
+        <p>A short spoken introduction to who I am and what I'm working toward.</p>
       </div>
 
       <div class="media-section">
-        <p class="media-label">🎬 Video Introduction</p>
+        <p class="media-label">Video Introduction</p>
         <video controls>
           <source src="media/intro.mp4" type="video/mp4" />
           Your browser does not support the video element.
         </video>
-        <p><em>Note: Replace this placeholder with a personal video introduction.</em></p>
+        <p>A brief on-camera walkthrough of my background, projects, and goals.</p>
       </div>
     </section>
 
@@ -172,7 +321,7 @@
         I would love to hear from you.
       </p>
 
-      <form action="https://wp.zybooks.com/form-viewer.php" method="POST">
+      <form id="contact-form" action="https://formspree.io/f/FORM_ID_PENDING" method="POST">
 
         <div class="two-col">
           <div class="form-group">
@@ -238,15 +387,103 @@
       </form>
     </section>
 
+    <hr />
+
+    <!-- SOURCES & CREDITS -->
+    <section id="credits">
+      <span class="section-label">Attribution</span>
+      <h2>Sources &amp; Credits</h2>
+      <p class="page-intro">
+        All written content, code, and project screenshots on this site are my original work.
+        The third-party assets used for visual design are acknowledged below, with in-text credit
+        shown beside the collage where the stock photography appears.
+      </p>
+
+      <h3>References</h3>
+      <ul class="credits-list">
+        <li>
+          LoremFlickr. (n.d.). <em>Creative Commons stock photography</em> [Photographs]. Flickr, Creative Commons.
+          Retrieved June 2026, from
+          <a href="https://loremflickr.com" target="_blank" rel="noopener">https://loremflickr.com</a>.
+          Images served from Flickr under Creative Commons licenses; downloaded and stored locally in
+          <span class="mono-text">/media/</span> for non-commercial, illustrative use.
+        </li>
+        <li>
+          McInerney, M., Impallari, P., &amp; Fuenzalida, R. (n.d.). <em>Raleway</em> [Typeface].
+          Google Fonts, SIL Open Font License.
+          <a href="https://fonts.google.com/specimen/Raleway" target="_blank" rel="noopener">https://fonts.google.com/specimen/Raleway</a>
+        </li>
+        <li>
+          Dziedzic, &#321;. (n.d.). <em>Lato</em> [Typeface]. Google Fonts, SIL Open Font License.
+          <a href="https://fonts.google.com/specimen/Lato" target="_blank" rel="noopener">https://fonts.google.com/specimen/Lato</a>
+        </li>
+        <li>
+          Hunt, P. D. (n.d.). <em>Source Code Pro</em> [Typeface]. Adobe, via Google Fonts, SIL Open Font License.
+          <a href="https://fonts.google.com/specimen/Source+Code+Pro" target="_blank" rel="noopener">https://fonts.google.com/specimen/Source+Code+Pro</a>
+        </li>
+        <li>
+          Banuelos, S. (2026). <em>Personal portfolio website and CeREbrus project screenshots</em> [Original work].
+          Created for Western Governors University coursework. All HTML, CSS, JavaScript, written content,
+          and screenshots authored by the site owner.
+        </li>
+      </ul>
+    </section>
+
   </main>
 
   <!-- FOOTER -->
   <footer>
     <p id="site-footer-text">
-      &copy; 2025 Sergio Banuelos · Built with HTML, CSS &amp; JavaScript · Western Governors University Portfolio
+      &copy; 2026 Sergio Banuelos · Built with HTML, CSS &amp; JavaScript · Western Governors University Portfolio
     </p>
     <p><a href="resume.html">Résumé</a> &nbsp;|&nbsp; <a href="cover-letter.html">Cover Letter</a> &nbsp;|&nbsp; <a href="career-goals.html">Career Goals</a></p>
   </footer>
+
+  <!-- Contact form: mailto fallback until the Formspree form ID is configured -->
+  <script>
+    (function () {
+      var form = document.getElementById('contact-form');
+      if (!form || form.action.indexOf('FORM_ID_PENDING') === -1) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var f = new FormData(form);
+        var subject = 'Portfolio contact from ' + (f.get('first_name') || '') + ' ' + (f.get('last_name') || '');
+        var body = 'Name: ' + f.get('first_name') + ' ' + f.get('last_name') +
+          '\nCompany: ' + (f.get('company_name') || '-') +
+          '\nEmail: ' + f.get('email') +
+          '\nBest time: ' + (f.get('contact_time') || '-') +
+          '\nPreferred method: ' + (f.get('contact_method') || '-') +
+          '\n\n' + (f.get('message') || '');
+        window.location.href = 'mailto:sergiobanuelos03@gmail.com?subject=' +
+          encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      });
+    })();
+  </script>
+
+  <!-- Scroll-reveal (progressive enhancement; no frameworks) -->
+  <script>
+    document.documentElement.classList.add('js');
+    document.addEventListener('DOMContentLoaded', function () {
+      var targets = document.querySelectorAll('main section, .goal-card, article, .collage figure, .interview-item');
+      targets.forEach(function (el) { el.classList.add('reveal'); });
+
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      targets.forEach(function (el) { observer.observe(el); });
+    });
+  </script>
 
 </body>
 </html>

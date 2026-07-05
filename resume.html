@@ -13,18 +13,23 @@
 
   <!-- HEADER -->
   <header>
-    <img id="profile-photo" src="media/profile.png" alt="Sergio Banuelos profile photo" />
+    <img id="profile-photo" src="media/profile.jpg" alt="Sergio Banuelos profile photo" />
 
     <h5>Portfolio</h5>
     <h1 class="hero-name">Sergio Banuelos</h1>
-    <p class="hero-subtitle">Software Engineer</p>
+    <p class="hero-subtitle">Aspiring Software Engineer</p>
 
     <div class="contact-bar">
-      <span>📧 <a href="mailto:sergiobanuelos03@gmail.com">sergiobanuelos03@gmail.com</a></span>
-      <span>📞 <a href="tel:6785550147">(678) 555-0147</a></span>
-      <span>📍 Atlanta, GA</span>
-      <span>🔗 <a href="https://www.linkedin.com/in/sergio-banuelos-atl" target="_blank">linkedin.com/in/sergio-banuelos-atl</a></span>
+      <span><a href="mailto:sergiobanuelos03@gmail.com">sergiobanuelos03@gmail.com</a></span>
+      <span>Greater Atlanta, GA</span>
+      <span><a href="https://www.linkedin.com/in/sergio-banuelos-atl" target="_blank">linkedin.com/in/sergio-banuelos-atl</a></span>
     </div>
+
+    <p class="identity-flair">
+      <span class="flair-chip">Coding enthusiast</span>
+      <span class="flair-chip">Dog-hiker</span>
+      <span class="flair-chip">Ranked grinder</span>
+    </p>
 
     <!-- JavaScript: Populate current date -->
     <div id="current-date"></div>
@@ -35,6 +40,29 @@
 
       // Console message
       console.log('Welcome to Sergio Banuelos\' portfolio! Built with HTML, CSS, and JavaScript.');
+
+      // Scroll-reveal (progressive enhancement; no frameworks)
+      document.documentElement.classList.add('js');
+      document.addEventListener('DOMContentLoaded', function () {
+        var targets = document.querySelectorAll('main section, article, .collage figure');
+        targets.forEach(function (el) { el.classList.add('reveal'); });
+
+        if (!('IntersectionObserver' in window)) {
+          targets.forEach(function (el) { el.classList.add('is-visible'); });
+          return;
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08 });
+
+        targets.forEach(function (el) { observer.observe(el); });
+      });
     </script>
 
     <!-- NAV -->
@@ -42,6 +70,7 @@
       <a href="resume.html" class="active">Résumé</a>
       <a href="cover-letter.html">Cover Letter</a>
       <a href="career-goals.html">Career Goals</a>
+      <a href="resume-world.html">Sergio's World</a>
     </nav>
   </header>
 
@@ -170,7 +199,7 @@
         <h3>High School Diploma</h3>
         <p class="job-meta">
           <span class="date-badge">Graduated 2020</span>&nbsp;&nbsp;
-          <strong>Georgia</strong>
+          <strong>Pebblebrook High School</strong> · Mableton, GA
         </p>
       </article>
     </section>
@@ -186,7 +215,7 @@
       </p>
 
       <table>
-        <caption>Sergio Banuelos — Technical Skills Assessment (Self-Evaluated, 2025)</caption>
+        <caption>Sergio Banuelos — Technical Skills Assessment (Self-Evaluated, 2026)</caption>
         <thead>
           <tr>
             <th>Skill</th>
@@ -250,6 +279,39 @@
       <h2>Projects</h2>
 
       <article>
+        <h3>CeREbrus — Enterprise Retail Intelligence Platform</h3>
+        <h4>lablab.ai Hackathon — <strong>Solo Builder</strong> | Transforming Enterprise Through AI</h4>
+        <p>
+          Built <em>solo</em> during lablab.ai's <strong>"Transforming Enterprise Through AI"</strong> hackathon,
+          CeREbrus is an enterprise retail intelligence platform powered by <strong>Google's Agent Development Kit (ADK)</strong>
+          and <strong>Gemini</strong>. It orchestrates three specialized AI agents — <strong>Knowledge Guardian</strong>,
+          <strong>Customer Intel</strong>, and <strong>Synthesis</strong> — coordinated by a dedicated
+          <strong>Governance</strong> agent that enforces compliance and oversight across every decision.
+        </p>
+        <p>
+          I designed the full multi-agent architecture, built the <strong>Python</strong> backend, and
+          <strong>deployed it live</strong> during the competition via a <strong>Cloudflare Tunnel</strong> —
+          taking it from concept to a publicly reachable demo inside the hackathon window.
+        </p>
+        <div class="project-shots">
+          <figure>
+            <img src="media/cerebrus-dashboard.png" alt="CeREbrus dashboard hero view" />
+            <figcaption>Intelligence dashboard</figcaption>
+          </figure>
+          <figure>
+            <img src="media/cerebrus-query.png" alt="CeREbrus cross-domain query interface" />
+            <figcaption>Cross-domain agent query</figcaption>
+          </figure>
+        </div>
+        <ul>
+          <li><em>Stack:</em> Google Agent Development Kit (ADK), Gemini, Python, Cloudflare Tunnel</li>
+          <li>Solo build — full AI agent architecture, backend development, and live deployment</li>
+          <li>Four-agent design: three specialist agents plus a Governance agent for compliance oversight</li>
+          <li>Repository: <a href="https://github.com/SergioB03/CeRebrus" target="_blank">github.com/SergioB03/CeRebrus</a></li>
+        </ul>
+      </article>
+
+      <article>
         <h3>Valorant Performance Analyzer &amp; Mental Coach AI</h3>
         <h4>Personal Project — <strong>In Development</strong></h4>
         <p>
@@ -280,7 +342,7 @@
           Built at the <strong>VibraATL hackathon</strong> at <strong>Georgia State University</strong>, DineroClaro is a
           cross-platform mobile app designed to <em>empower the underserved Hispanic community in Atlanta</em> by
           increasing financial literacy. The app helps users track spending, understand cash flow, and learn core
-          financial concepts in an accessible, culturally-relevant way — bridging a gap left by traditional banking tools.
+          financial concepts in an accessible, culturally relevant way — bridging a gap left by traditional banking tools.
         </p>
         <p>
           Built with <strong>Expo</strong> and <strong>TypeScript</strong> on the front end and a <strong>Python</strong> service layer,
