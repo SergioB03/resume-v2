@@ -186,6 +186,21 @@
 
   /* ============ PLANET ============ */
 
+  /* breathing aura ring behind the planet — LBP pod-planet glow */
+  #planet-aura {
+    position: fixed; left: 50%; top: var(--gy);
+    width: calc(var(--globe-d) * 1.22); height: calc(var(--globe-d) * 1.22);
+    margin: 0; transform: translate(-50%, -50%);
+    border-radius: 50%; pointer-events: none; z-index: 1;
+    background: radial-gradient(circle,
+      transparent 38%, rgba(0,180,216,.28) 46%, rgba(144,224,239,.14) 55%, transparent 68%);
+    animation: aura-breathe 6s ease-in-out infinite;
+  }
+  @keyframes aura-breathe {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .8; }
+    50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+  }
+
   #planet {
     position: fixed;
     left: 50%; top: var(--gy);
@@ -193,9 +208,10 @@
     transform: translate(-50%, -50%);
     border-radius: 50%;
     overflow: hidden;   /* clips landmass decals to the sphere */
+    /* felt-ocean base — the patchwork continents carry the color */
     background:
       repeating-radial-gradient(circle at 50% 42%, rgba(255,255,255,.028) 0 2px, transparent 2px 7px),
-      radial-gradient(circle at 44% 36%, var(--felt-light) 0%, var(--felt-mid) 42%, var(--felt-dark) 68%, var(--felt-deepest) 100%);
+      radial-gradient(circle at 44% 36%, #4a90b8 0%, #33718f 42%, #235a75 68%, #17435c 100%);
     z-index: 2;
   }
   /* felt crosshatch weave */
@@ -216,13 +232,15 @@
     border-radius: 50%;
     pointer-events: none; z-index: 3;
     background:
-      radial-gradient(circle at 36% 26%, rgba(255,255,255,.16), transparent 42%),
-      radial-gradient(circle at 68% 82%, rgba(4,10,8,.55), transparent 60%);
+      radial-gradient(circle at 36% 26%, rgba(255,255,255,.24), transparent 44%),
+      radial-gradient(circle at 30% 18%, rgba(255,255,255,.28), transparent 22%),
+      radial-gradient(circle at 68% 82%, rgba(2,10,16,.62), transparent 60%),
+      radial-gradient(circle at 50% 98%, rgba(0,180,216,.18), transparent 38%);
     box-shadow:
-      inset -2vmin -3vmin 9vmin rgba(3,9,6,.55),
-      inset 2vmin 3vmin 8vmin rgba(255,255,255,.09),
-      0 0 6vmin rgba(0,180,216,.22),
-      0 0 20vmin rgba(0,180,216,.10);
+      inset -2vmin -3.5vmin 10vmin rgba(2,10,16,.6),
+      inset 2vmin 3vmin 9vmin rgba(255,255,255,.13),
+      0 0 7vmin rgba(0,180,216,.30),
+      0 0 22vmin rgba(0,180,216,.13);
   }
   /* stitched "equator" seam hint on the lighting layer */
   #planet-light::after {
@@ -254,6 +272,63 @@
     box-shadow: 0 3px 0 rgba(3,9,6,.5);
   }
   .geo.bush::after { display: none; }
+
+  /* patchwork fabric materials — the LBP quilt look */
+  .geo.feltg {
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0 1px, transparent 1px 4px),
+      radial-gradient(circle at 38% 30%, var(--felt-light), var(--felt-dark) 82%);
+  }
+  .geo.denim {
+    background:
+      repeating-linear-gradient(55deg, rgba(255,255,255,.07) 0 2px, transparent 2px 5px),
+      linear-gradient(145deg, #6b8db0, #46688a);
+  }
+  .geo.cord {
+    background:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.14) 0 3px, transparent 3px 7px),
+      linear-gradient(145deg, #e8944a, #c26d2e);
+  }
+  .geo.pinkf {
+    background:
+      repeating-linear-gradient(-45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 4px),
+      radial-gradient(circle at 35% 30%, #f2a1c4, #d76d9d 85%);
+  }
+  .geo.gingham {
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.28) 0 6px, transparent 6px 12px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.28) 0 6px, transparent 6px 12px),
+      #e0b44e;
+  }
+
+  /* ambient LBP score-bubbles drifting up through the scene */
+  .bubble {
+    position: fixed; border-radius: 50%; pointer-events: none;
+    background:
+      radial-gradient(circle at 30% 25%, rgba(255,255,255,.55), rgba(255,255,255,.06) 42%, transparent 60%),
+      radial-gradient(circle at 70% 75%, rgba(144,224,239,.25), transparent 55%);
+    border: 1px solid rgba(255,255,255,.3);
+    box-shadow: inset 0 0 8px rgba(144,224,239,.25), 0 0 12px rgba(144,224,239,.18);
+    opacity: 0;
+  }
+  .bubble.front { z-index: 8; }
+  .bubble.back { z-index: 1; }
+  .bubble.a { animation: bub-a var(--dur) linear var(--delay) infinite; }
+  .bubble.b { animation: bub-b var(--dur) linear var(--delay) infinite; }
+  @keyframes bub-a {
+    0% { transform: translateY(104vh) translateX(0); opacity: 0; }
+    8% { opacity: .85; }
+    55% { transform: translateY(46vh) translateX(22px); }
+    92% { opacity: .7; }
+    100% { transform: translateY(-8vh) translateX(-14px); opacity: 0; }
+  }
+  @keyframes bub-b {
+    0% { transform: translateY(104vh) translateX(0); opacity: 0; }
+    8% { opacity: .7; }
+    50% { transform: translateY(50vh) translateX(-26px); }
+    92% { opacity: .6; }
+    100% { transform: translateY(-8vh) translateX(16px); opacity: 0; }
+  }
 
   /* standing props on the sphere — projected like markers, non-interactive */
   .prop {
@@ -290,18 +365,46 @@
     border-radius: 50%;
     display: grid; place-items: center;
     background:
-      radial-gradient(circle at 32% 26%, rgba(255,255,255,.4), transparent 46%),
+      radial-gradient(circle at 32% 24%, rgba(255,255,255,.6), transparent 44%),
       radial-gradient(circle at 50% 55%, var(--lv-hi) 0%, var(--lv) 55%, var(--lv-deep) 130%);
     border: 4px solid var(--paper);
     box-shadow: 0 3px 0 rgba(0,0,0,.28), 0 10px 18px rgba(0,0,0,.45),
-                inset 0 4px 7px rgba(255,255,255,.35), inset 0 -5px 10px rgba(0,0,0,.28);
+                inset 0 4px 7px rgba(255,255,255,.4), inset 0 -5px 10px rgba(0,0,0,.28);
     /* scale via the independent `scale` property so the JS depth transform
        on the parent never re-triggers a transition */
     transition: scale .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
     transform: rotate(var(--tilt));
+    animation: stk-bob 2.8s ease-in-out infinite alternate;
+  }
+  @keyframes stk-bob {
+    from { transform: rotate(var(--tilt)) translateY(-2px); }
+    to   { transform: rotate(var(--tilt)) translateY(3px); }
+  }
+  /* soft per-level color aura behind each prize bubble */
+  .sticker::before {
+    content: ""; position: absolute; inset: -20%; border-radius: 50%; z-index: -1;
+    background: radial-gradient(circle, var(--lv) 0%, transparent 62%);
+    opacity: .34; filter: blur(6px);
+  }
+  /* glassy prize-bubble shell over the sticker face */
+  .sticker::after {
+    content: ""; position: absolute; inset: -13%; border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 22%, rgba(255,255,255,.55), rgba(255,255,255,.08) 38%, transparent 55%),
+      radial-gradient(circle at 72% 82%, rgba(255,255,255,.16), transparent 45%);
+    border: 1.5px solid rgba(255,255,255,.4);
+    box-shadow: inset 0 0 14px rgba(255,255,255,.22);
+    pointer-events: none;
   }
   .marker:nth-of-type(odd)  .sticker { --tilt: -5deg; }
   .marker:nth-of-type(even) .sticker { --tilt: 4deg; }
+  .marker:nth-of-type(3n)   .sticker { animation-delay: -.9s; }
+  .marker:nth-of-type(3n+1) .sticker { animation-delay: -1.9s; }
+  .marker.active .sticker::before { animation: aura-pulse 1.6s ease-in-out infinite; }
+  @keyframes aura-pulse {
+    0%, 100% { opacity: .4; transform: scale(1); }
+    50% { opacity: .75; transform: scale(1.14); }
+  }
   .marker:hover .sticker, .marker:focus-visible .sticker { scale: 1.12; }
   .marker:focus-visible .sticker { outline: 3px solid var(--accent-light); outline-offset: 3px; }
   .marker.active .sticker {
@@ -977,7 +1080,9 @@
     #scarf-tail, .staged .picado b, .staged .fairy b,
     .big-contacts a.primary, .staged .save-diamond,
     .sparkle, .status-chip::after, .shoot, #sun .rays,
+    .sticker, .marker.active .sticker::before, #planet-aura,
     .walking #pg-flipper-l, .walking #pg-flipper-r { animation: none !important; }
+    .bubble { display: none; }
     #scene { transition: none; }
     [data-stagger] { opacity: 1; transform: none; }
     .staged [data-stagger] { transition: none; }
@@ -1041,6 +1146,7 @@
   <div id="scene" aria-describedby="a11y-help">
 
     <!-- PLANET (landmass decals and props are generated and projected by JS) -->
+    <div id="planet-aura" aria-hidden="true"></div>
     <div id="planet" aria-hidden="true"></div>
     <div id="planet-light" aria-hidden="true"></div>
     <div id="props" aria-hidden="true"></div>
@@ -1765,14 +1871,20 @@
       { id: 'homebase', lat: 38,  lon: 290, name: 'Home Base: McDonough' },
       { id: 'contact',  lat: -30, lon: 322, name: 'New Game+: The Google Run' }
     ];
-    /* decorative cardboard landmasses (avoid marker spots) */
+    /* patchwork continents — quilted fabric covers most of the felt ocean */
     var GEOS = [
-      { lat: 14,  lon: 22,  cls: '' },       { lat: -8,  lon: 60,  cls: 'small' },
-      { lat: 30,  lon: 100, cls: '' },       { lat: -42, lon: 118, cls: 'bush' },
-      { lat: 5,   lon: 145, cls: 'small' },  { lat: -18, lon: 190, cls: '' },
-      { lat: 46,  lon: 208, cls: 'bush' },   { lat: 20,  lon: 235, cls: 'small' },
-      { lat: -40, lon: 262, cls: '' },       { lat: 8,   lon: 300, cls: 'bush' },
-      { lat: -12, lon: 335, cls: 'small' },  { lat: 56,  lon: 322, cls: '' }
+      { lat: 12,  lon: 12,  cls: 'feltg' },        { lat: -20, lon: 32,  cls: 'denim small' },
+      { lat: 42,  lon: 52,  cls: 'pinkf small' },  { lat: -5,  lon: 72,  cls: '' },
+      { lat: 26,  lon: 92,  cls: 'gingham small' },{ lat: -38, lon: 108, cls: 'feltg' },
+      { lat: 8,   lon: 126, cls: 'cord small' },   { lat: 48,  lon: 148, cls: 'feltg' },
+      { lat: -22, lon: 158, cls: 'denim' },        { lat: 12,  lon: 186, cls: 'pinkf small' },
+      { lat: -46, lon: 200, cls: 'gingham small' },{ lat: 30,  lon: 218, cls: 'feltg small' },
+      { lat: -8,  lon: 238, cls: '' },             { lat: 50,  lon: 262, cls: 'cord small' },
+      { lat: -32, lon: 278, cls: 'feltg' },        { lat: 6,   lon: 294, cls: 'denim small' },
+      { lat: 34,  lon: 314, cls: 'gingham small' },{ lat: -44, lon: 330, cls: 'cord' },
+      { lat: 16,  lon: 350, cls: 'feltg small' },  { lat: -12, lon: 4,   cls: 'pinkf small' },
+      { lat: -42, lon: 118, cls: 'bush' },         { lat: 46,  lon: 206, cls: 'bush' },
+      { lat: 8,   lon: 302, cls: 'bush' },         { lat: -28, lon: 44,  cls: 'bush' }
     ];
     var ACCEL = 240, MAX_SPEED = 110, FRICTION = 4.0, STOP_EPS = 0.4, DT_MAX = 0.05;
     var ALIGN_IN = 16, ALIGN_OUT = 22;   /* degrees off front-center, with hysteresis */
@@ -2019,6 +2131,23 @@
       propsWrap.appendChild(el);
       propEls.push({ lat: p.lat, lon: p.lon, el: el });
     });
+
+    /* ================= ambient score bubbles ================= */
+    (function () {
+      var wrap = document.createDocumentFragment();
+      for (var i = 0; i < 12; i++) {
+        var b = document.createElement('div');
+        var size = 10 + frac(Math.sin(i * 12.9898) * 43758.5453) * 26;
+        b.className = 'bubble ' + (i % 2 ? 'a' : 'b') + ' ' + (i % 3 ? 'back' : 'front');
+        b.style.width = size.toFixed(0) + 'px';
+        b.style.height = size.toFixed(0) + 'px';
+        b.style.left = (frac(Math.sin(i * 78.233) * 12543.2331) * 94 + 3) + 'vw';
+        b.style.setProperty('--dur', (15 + frac(Math.sin(i * 3.7)) * 12).toFixed(1) + 's');
+        b.style.setProperty('--delay', (-frac(Math.sin(i * 9.1)) * 20).toFixed(1) + 's');
+        wrap.appendChild(b);
+      }
+      document.body.appendChild(wrap);
+    })();
 
     /* ================= day/night follows the visitor's clock ================= */
     function updateDayNight() {
