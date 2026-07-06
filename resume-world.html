@@ -2229,8 +2229,9 @@
       }
     }
 
-    function syncPenguin() {
-      var speed = Math.abs(vy) + Math.abs(vp);
+    /* drive the waddle from any motion source: physics velocity OR live drag.
+       speed in deg/s sets cadence; vyLike's sign sets which way he faces. */
+    function syncPenguin(speed, vyLike) {
       var walking = speed > 8;
       if (walking !== walkingClass) {
         walkingClass = walking;
@@ -2238,8 +2239,8 @@
         if (!walking) waddle.style.animationDuration = '';
       }
       if (walking) {
-        waddle.style.animationDuration = clamp(0.9 - (speed / MAX_SPEED) * 0.45, 0.45, 0.9) + 's';
-        var f = vy < -1 ? 1 : vy > 1 ? -1 : lastFacing; /* story-forward = right */
+        waddle.style.animationDuration = clamp(0.9 - (speed / MAX_SPEED) * 0.45, 0.4, 0.9) + 's';
+        var f = vyLike < -1 ? 1 : vyLike > 1 ? -1 : lastFacing; /* story-forward = right */
         if (f !== lastFacing) { lastFacing = f; facing.style.transform = 'scaleX(' + f + ')'; }
       }
     }
@@ -2272,7 +2273,7 @@
       if (pitch === -60 || pitch === 60) vp = 0;
       render();
       updateAlignment();
-      syncPenguin();
+      syncPenguin(Math.abs(vy) + Math.abs(vp), vy);
       if (vy === 0 && vp === 0 && dirY === 0 && dirP === 0 && !springTarget && !springing) { rafId = null; return; }
       rafId = requestAnimationFrame(tick);
     }
@@ -2717,6 +2718,7 @@
     /* globe drag / fling — both axes, surface follows the pointer */
     (function () {
       var dragging = false, lastX = 0, lastY = 0, lastT = 0, lastDX = 0, lastDY = 0, lastDT = 16;
+      var dragIdleT = null;
       var K_DRAG = 0.30; /* deg per px */
       scene.addEventListener('pointerdown', function (e) {
         if (state !== 'WORLD' || RM || popitOpen) return;
@@ -2733,18 +2735,24 @@
         vy = 0; vp = 0; springTarget = null;
         render();
         updateAlignment();
+        /* waddle at the live drag speed, facing the direction of the pull */
+        var dragVY = K_DRAG * lastDX / (lastDT / 1000);
+        var dragVP = K_DRAG * lastDY / (lastDT / 1000);
+        syncPenguin(Math.min(Math.abs(dragVY) + Math.abs(dragVP), 220), dragVY);
+        clearTimeout(dragIdleT);
+        dragIdleT = setTimeout(function () { if (dragging) syncPenguin(0, 0); }, 130);
         lastX = e.clientX; lastY = e.clientY; lastT = now;
         if (!titleFaded) { titleFaded = true; worldTitle.classList.add('faded'); }
       });
       window.addEventListener('pointerup', function () {
         if (!dragging) return;
         dragging = false;
-        if (performance.now() - lastT > 100) { vy = 0; vp = 0; return; }
+        if (performance.now() - lastT > 100) { vy = 0; vp = 0; syncPenguin(0, 0); return; }
         vy = clamp(K_DRAG * lastDX / (lastDT / 1000), -170, 170);
         vp = clamp(K_DRAG * lastDY / (lastDT / 1000), -110, 110);
         wake();
       });
-      window.addEventListener('pointercancel', function () { dragging = false; });
+      window.addEventListener('pointercancel', function () { dragging = false; syncPenguin(0, 0); });
     })();
 
     /* ================= lifecycle ================= */
