@@ -2276,17 +2276,21 @@
     }
 
     /* drive the waddle from any motion source: physics velocity OR live drag.
-       speed in deg/s sets cadence; vyLike's sign sets which way he faces. */
+       speed in deg/s sets cadence; vyLike's sign sets which way he faces.
+       Hysteresis (start >12, stop <6) + quantized cadence keep slow noisy
+       input from flapping the walk state or retiming the animation. */
+    var lastDur = '';
     function syncPenguin(speed, vyLike) {
-      var walking = speed > 8;
+      var walking = walkingClass ? speed > 6 : speed > 12;
       if (walking !== walkingClass) {
         walkingClass = walking;
         waddle.classList.toggle('walking', walking);
-        if (!walking) waddle.style.animationDuration = '';
+        if (!walking) { waddle.style.animationDuration = ''; lastDur = ''; }
       }
       if (walking) {
-        waddle.style.animationDuration = clamp(0.9 - (speed / MAX_SPEED) * 0.45, 0.4, 0.9) + 's';
-        var f = vyLike < -1 ? 1 : vyLike > 1 ? -1 : lastFacing; /* story-forward = right */
+        var dur = (Math.round(clamp(0.9 - (speed / MAX_SPEED) * 0.45, 0.4, 0.9) * 20) / 20) + 's';
+        if (dur !== lastDur) { lastDur = dur; waddle.style.animationDuration = dur; }
+        var f = vyLike < -4 ? 1 : vyLike > 4 ? -1 : lastFacing; /* story-forward = right */
         if (f !== lastFacing) { lastFacing = f; facing.style.transform = 'scaleX(' + f + ')'; }
       }
     }
@@ -2765,11 +2769,13 @@
     (function () {
       var dragging = false, lastX = 0, lastY = 0, lastT = 0, lastDX = 0, lastDY = 0, lastDT = 16;
       var dragIdleT = null;
+      var smVY = 0, smVP = 0;   /* low-pass filtered drag velocity (deg/s) */
       var K_DRAG = 0.30; /* deg per px */
       scene.addEventListener('pointerdown', function (e) {
         if (state !== 'WORLD' || RM || popitOpen) return;
         if (e.target.closest && (e.target.closest('.marker') || e.target.closest('button'))) return;
         dragging = true; lastX = e.clientX; lastY = e.clientY; lastT = performance.now();
+        smVY = 0; smVP = 0;
       });
       window.addEventListener('pointermove', function (e) {
         if (!dragging) return;
@@ -2781,10 +2787,12 @@
         vy = 0; vp = 0; springTarget = null;
         render();
         updateAlignment();
-        /* waddle at the live drag speed, facing the direction of the pull */
-        var dragVY = K_DRAG * lastDX / (lastDT / 1000);
-        var dragVP = K_DRAG * lastDY / (lastDT / 1000);
-        syncPenguin(Math.min(Math.abs(dragVY) + Math.abs(dragVP), 220), dragVY);
+        /* waddle at the SMOOTHED drag speed — raw per-event velocity is far
+           too spiky at slow mouse speeds and makes the penguin jitter */
+        var a = clamp(lastDT / 90, 0.12, 0.5);  /* time-aware EMA */
+        smVY += (K_DRAG * lastDX / (lastDT / 1000) - smVY) * a;
+        smVP += (K_DRAG * lastDY / (lastDT / 1000) - smVP) * a;
+        syncPenguin(Math.min(Math.abs(smVY) + Math.abs(smVP), 220), smVY);
         clearTimeout(dragIdleT);
         dragIdleT = setTimeout(function () { if (dragging) syncPenguin(0, 0); }, 130);
         lastX = e.clientX; lastY = e.clientY; lastT = now;
@@ -2794,8 +2802,9 @@
         if (!dragging) return;
         dragging = false;
         if (performance.now() - lastT > 100) { vy = 0; vp = 0; syncPenguin(0, 0); return; }
-        vy = clamp(K_DRAG * lastDX / (lastDT / 1000), -170, 170);
-        vp = clamp(K_DRAG * lastDY / (lastDT / 1000), -110, 110);
+        /* fling from the smoothed velocity too — steadier release feel */
+        vy = clamp(smVY, -170, 170);
+        vp = clamp(smVP, -110, 110);
         wake();
       });
       window.addEventListener('pointercancel', function () { dragging = false; syncPenguin(0, 0); });
