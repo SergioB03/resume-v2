@@ -142,9 +142,8 @@ python -m http.server 8000
 
 ## 📜 Credits & license
 
-All code, written content, and project screenshots are the original work of **Sergio Banuelos**.
+All code, written content, graphics, and project screenshots are the original work of **Sergio Banuelos** — including the custom "Beyond the Code" collage tiles, hand-designed to match the site.
 
-- **Stock imagery** in the "Beyond the Code" gallery is served from [LoremFlickr](https://loremflickr.com) under Creative Commons, stored locally for illustrative use.
 - **Typefaces** (Raleway, Lato, Source Code Pro) are used under the SIL Open Font License via [Google Fonts](https://fonts.google.com).
 
 This is a personal portfolio. You're welcome to read the code and learn from it — please don't republish the written content, personal media, or likeness as your own.
